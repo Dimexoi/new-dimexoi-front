@@ -23,7 +23,7 @@ export default function RootLayout({
         <Providers>
           <Header home={true}/>
             {children}
-          <Footer/>
+          
         </Providers>
       </body>
     </html>

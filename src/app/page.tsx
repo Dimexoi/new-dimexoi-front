@@ -10,14 +10,20 @@ import wood from '../../public/images/home/icons/wood.png';
 import worker from '../../public/images/home/icons/worker.png';
 import plan from '../../public/images/home/icons/plan.png';
 import where from '../../public/images/home/icons/where.png';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
     <div className='h-full'>
+      
       <Hero />
-    <main>
+      <main>
 
         <NewArrivals/>
+        <div>
+          componsant CutomMade commenté
+        </div>
         {/* <CustomMade/> */}
 
         <section className='mt-4 p-4 flex flex-col items-center'>
@@ -27,7 +33,7 @@ export default function Home() {
           <h4 className='mt-4 self-start'>Avec Dimexoi profitez de :</h4>
           
           <div className='mt-4'>
-            <div className='flex items-center'> <Image src={truck} alt="Truck Icon" className='h-7 w-7 mr-5'/> <p>La livraison sur <strong>toute l'île</strong></p></div>
+            <div className='flex items-center'> <Image src={truck} alt="Truck Icon" className='h-7 w-7 mr-5'/> <p>La livraison sur <strong>toute l&apos;île</strong></p></div>
             <div className='flex items-center mt-2'> <Image src={premium} alt="Truck Icon" className='h-7 w-7 mr-5'/> <p>Une qualité <strong>premium</strong></p></div>
             <div className='flex items-center mt-2'> <Image src={wood} alt="Truck Icon" className='h-7 w-7 mr-5'/> <p>Mobiliers en réel <strong>bois massif</strong></p></div>
             <div className='flex items-center mt-2'> <Image src={worker} alt="Truck Icon" className='h-7 w-7 mr-5'/> <p>La conception par des <strong>artisans</strong></p></div>
@@ -58,6 +64,7 @@ export default function Home() {
 
 
       </main>
+      <Footer/>
     </div>
     
   )

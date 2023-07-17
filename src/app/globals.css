@@ -2,10 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, div#__next {
-  height: 100%;
-}
-
+html, body { height: 100% }
 .custom-img {
   background-image: url('../../public/images/home/SDB_Gattaga_10.jpg');
 }
