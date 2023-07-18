@@ -16,6 +16,7 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <div className='h-full'>
+      <Header home={true}/>
       <Hero />
 
       <main>
@@ -59,10 +60,7 @@ export default function Home() {
           </div>
                     
         </section>
-
-
       </main>
-      
     </div>
     
   )
