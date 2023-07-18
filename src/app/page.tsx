@@ -16,15 +16,13 @@ import Footer from '@/components/Footer';
 export default function Home() {
   return (
     <div className='h-full'>
-      
       <Hero />
+
       <main>
 
         <NewArrivals/>
-        <div>
-          componsant CutomMade commenté
-        </div>
-        {/* <CustomMade/> */}
+
+        <CustomMade/>
 
         <section className='mt-4 p-4 flex flex-col items-center'>
 
@@ -64,7 +62,7 @@ export default function Home() {
 
 
       </main>
-      <Footer/>
+      
     </div>
     
   )

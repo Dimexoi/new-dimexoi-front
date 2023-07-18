@@ -1,9 +1,9 @@
 import React from 'react';
 
-import ReactBeforeSliderComponent from 'react-before-after-slider-component';
 import 'react-before-after-slider-component/dist/build.css';
 
 import InfosFrame from '@/components/InfosFrame';
+import Slider from '@/components/Slider';
 
 const FIRST_IMAGE = {
   imageUrl: '/images/home/news/cordoba.jpg'
@@ -22,14 +22,8 @@ const CustomMade = () => {
 
           <p className='mt-1 px-6 py-3 text-justify'>Si vous ne trouvez pas votre bonheur, nous proposons également un service sur-mesure . C'est vous qui créez votre propre mobilier, afin qu'il soit unique et d'épouser les dimensions de votre espace.</p>      
           
-          <div className='h-50 p-2 overflow-hidden'>
-
-            {/* <ReactBeforeSliderComponent
-              firstImage={FIRST_IMAGE}
-              secondImage={SECOND_IMAGE}
-            /> */}
-          </div>
-          
+          <Slider/>
+ 
           <div className='bg-gray-400 p-5 text-center'>
 
             <h4 className='mb-4 text-lg'>Les étapes pour du sur-mesure</h4>
