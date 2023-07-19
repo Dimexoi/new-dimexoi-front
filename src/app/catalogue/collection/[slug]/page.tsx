@@ -10,44 +10,39 @@ import Head from 'next/head';
 
 import allCategoriesJson from '@/data/categories.json';
 import allProductsJson from '@/data/products.json';
+import allCollectionsJson from '@/data/collections.json';
+
 import { setProductsToDisplay } from '@/redux/features/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { setCategoryToDisplay } from '@/redux/features/categorySlice';
+import { setCategoryToDisplay, setCollectionToDisplay } from '@/redux/features/categorySlice';
 import Image from 'next/image';
 
 export async function generateStaticParams() {
  
-  return allCategoriesJson.map((category) => ({
-    slug: category.slug,
+  return allCollectionsJson.map((collection) => ({
+    slug: collection.slug,
   }))
 }
 
-const Category = ({ params }: { params: { slug: string } }) => {
+
+const Collection = ({ params }: { params: { slug: string } }) => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    if(params !== undefined) {
-
-    const productsToDisplay = allProductsJson.filter(product => product.categorySlug === params.slug);
-    let categoryToDisplay = allCategoriesJson.find(category => category.slug === params.slug);
-
-    dispatch(setProductsToDisplay(productsToDisplay));
-
-    if (categoryToDisplay) {
-
-      dispatch(setCategoryToDisplay(categoryToDisplay));
-
-    } else {
-      categoryToDisplay = {name: '', image: '', slug: ''}
-    }
-
+    if(params !== undefined) {    
     
-
-  } 
+        const collectionToDisplay = allCollectionsJson.find(collection => collection.slug === params.slug);
+        const productsToDisplay = allProductsJson.filter(product => product.collectionSlug === params.slug);
+    
+        if(collectionToDisplay) dispatch(setCollectionToDisplay(collectionToDisplay));
+        dispatch(setProductsToDisplay(productsToDisplay));
+        
+      }
+  
   }, [])
 
+  const collectionToDisplay = useAppSelector(state => state.category.collectionToDisplay);
   const productsToDisplay = useAppSelector(state => state.product.productsToDisplay);
-  const categoryToDisplay = useAppSelector(state => state.category.categoryToDisplay);
 
   const productJsx = productsToDisplay.map((product, index) => (
     <div key={index} className='mb-3'>
@@ -65,21 +60,24 @@ const Category = ({ params }: { params: { slug: string } }) => {
   ))
 
   return (
-    <div className='h-100 flex flex-col min-h-full mb-4'>
+    <div className='h-100 flex flex-col min-h-full'>
+
       <Header home={false}/>
+
       <Head>
-        <title>DIMEXOI : Les meubles pour votre {categoryToDisplay.name}</title>
+        <title>DIMEXOI : La collection {collectionToDisplay.name}</title>
       </Head>
+
       <main className='flex-1 p-4'>
 
-        <h1 className='text-center text-3xl font-poppins font-bold'>{categoryToDisplay.name}</h1>
-        <div className='mt-4'>
+        <h1 className='text-center text-3xl font-poppins font-bold'>{collectionToDisplay.name}</h1>
+
+        <div>
           {productJsx}
         </div>
-
       </main>
     </div>
   )
 }
 
-export default Category;
+export default Collection;

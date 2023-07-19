@@ -19,7 +19,7 @@ export default function Home() {
       <Header home={true}/>
       <Hero />
 
-      <main>
+      <main className='md:w-[70%] md:m-auto'>
 
         <NewArrivals/>
 

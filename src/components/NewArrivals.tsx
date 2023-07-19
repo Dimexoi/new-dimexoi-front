@@ -11,7 +11,7 @@ const NewArrivals = () => {
     <section className='text-center'>
       <div className='flex flex-col p-3  h-80'>
         <h3 className='text-3xl text-center text-[#528BA8] font-raleway font-bold'>Les nouveautés</h3>
-        <div className='flex overflow-scroll h-full mt-3'>
+        <div className='flex overflow-x-scroll h-full mt-3'>
 
           <Image src={cordoba} alt='Lit cordoba' className='mr-6 w-auto border-gray-300 border-2'/>
           <Image src={machine} alt='Machine' className='mr-6 h-full w-auto border-black border-2'/>

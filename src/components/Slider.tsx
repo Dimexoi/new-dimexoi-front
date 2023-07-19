@@ -11,7 +11,7 @@ const SECOND_IMAGE = {
 
 const Slider = () => {
     return(
-      <div className='h-50 p-2 overflow-hidden'>
+      <div className='h-50 overflow-hidden'>
         <ReactBeforeSliderComponent
           firstImage={FIRST_IMAGE}
           secondImage={SECOND_IMAGE}
