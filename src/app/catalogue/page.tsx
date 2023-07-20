@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 
 import {getAllCollections, getCategoryList, getProductList, getSomeSdbProducts} from '../../services/sheets';
 import { setAllCategories, setAllCollections } from '@/redux/features/categorySlice';
-import { setAllProducts, setSomeSdbProducts } from '@/redux/features/productSlice';
+import { findAllProducts, setAllProducts, setSomeSdbProducts } from '@/redux/features/productSlice';
 
 import allCategoriesJson from '@/data/categories.json';
 import allProducts from '@/data/products.json';
@@ -45,7 +45,7 @@ export default function Catalogue() {
         }
         return randomIndexes;
     }
-
+    dispatch(findAllProducts());
     dispatch(setAllCategories(allCategoriesJson));
     dispatch(setAllCollections(allCollectionsJson));
 
