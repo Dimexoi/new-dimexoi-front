@@ -1,6 +1,7 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 import { createAsyncThunk } from '@reduxjs/toolkit'
+import axios from 'axios'
 const Sellsy = require("node-sellsy").default
 
 export interface ProductState {
@@ -103,6 +104,45 @@ export const findAllProducts = createAsyncThunk('product/findAllProducts', async
   }
 });
 
+export const findProductsTest = createAsyncThunk('product/findAllProducts', async () => {
+  try {
+    
+    const response = await axios.get('https://api.sellsy.com/v2/items/favourite-filters', {
+      headers: {
+        'Authorization': "Bearer xx"
+      }
+    });
+    console.log(response);
+     
+  
+  } catch (error) {
+    console.log("error:", error);
+  }
+});
+
+export const findSdbProducts = createAsyncThunk('product/findSdbProducts', async () => {
+  try {
+    
+    const response = await axios.post('https://api.sellsy.com/v2/items/search',{
+      "filters": {
+        "type": [
+          "product"
+        ],
+        "favourite_filter": 438695
+      }
+    }, {
+      headers: {
+        'Authorization': "Bearer XX"
+      }
+    });
+    console.log(response);
+     
+  
+  } catch (error) {
+    console.log("error:", error);
+  }
+});
+
 // Define the initial state using that type
 const initialState: ProductState = {
   allProducts: [],
@@ -146,32 +186,41 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder
-      .addCase(findAllProducts.fulfilled, (state, action) => {
+      .addCase(findProductsTest.fulfilled, (state, action) => {
         console.log(action.payload);
-        for (const product of action.payload) {
-          state.someSdbProducts.push(
-            {
-              name: product.tradename,
-              categoryName: product.categoryName,
-              categorySlug: product,
-              subcategoryName: product,
-              attribute: product,
-              dimensions: product,
-              images: [...product],
-              description : product,
-              available: product,
-              collection: product,
-              collectionSlug: product,
-              slug: product,
-              subcategorySlug: product
-            }
-          )
-        }
+        // for (const product of action.payload) {
+        //   state.someSdbProducts.push(
+        //     {
+        //       name: product.tradename,
+        //       categoryName: product.categoryName,
+        //       categorySlug: product,
+        //       subcategoryName: product,
+        //       attribute: product,
+        //       dimensions: product,
+        //       images: [...product],
+        //       description : product,
+        //       available: product,
+        //       collection: product,
+        //       collectionSlug: product,
+        //       slug: product,
+        //       subcategorySlug: product
+        //     }
+        //   )
+        // }
       })
-      .addCase(findAllProducts.pending, (state, action) => {
+      .addCase(findProductsTest.pending, (state, action) => {
         console.log('pending');
       })
-      .addCase(findAllProducts.rejected, (state, action) => {
+      .addCase(findProductsTest.rejected, (state, action) => {
+        console.log('rejected');
+      })
+      .addCase(findSdbProducts.fulfilled, (state, action) => {
+        console.log(action.payload);
+      })
+      .addCase(findSdbProducts.pending, (state, action) => {
+        console.log('pending');
+      })
+      .addCase(findSdbProducts.rejected, (state, action) => {
         console.log('rejected');
       })
   },
