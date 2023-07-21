@@ -128,14 +128,20 @@ export const findSdbProducts = createAsyncThunk('product/findSdbProducts', async
         "type": [
           "product"
         ],
-        "favourite_filter": 438695
+        "favourite_filter": 438873
       }
-    }, {
+    },{
+      params: {
+        field: ['']
+      },
       headers: {
         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
       }
     });
     console.log(response);
+    const fetchedProducts = response.data;
+
+    return(response.data)
      
   
   } catch (error) {
@@ -188,34 +194,36 @@ export const productSlice = createSlice({
     builder
       .addCase(findProductsTest.fulfilled, (state, action) => {
         console.log(action.payload);
-        // for (const product of action.payload) {
-        //   state.someSdbProducts.push(
-        //     {
-        //       name: product.tradename,
-        //       categoryName: product.categoryName,
-        //       categorySlug: product,
-        //       subcategoryName: product,
-        //       attribute: product,
-        //       dimensions: product,
-        //       images: [...product],
-        //       description : product,
-        //       available: product,
-        //       collection: product,
-        //       collectionSlug: product,
-        //       slug: product,
-        //       subcategorySlug: product
-        //     }
-        //   )
-        // }
+        
       })
       .addCase(findProductsTest.pending, (state, action) => {
         console.log('pending');
+        
       })
       .addCase(findProductsTest.rejected, (state, action) => {
         console.log('rejected');
       })
       .addCase(findSdbProducts.fulfilled, (state, action) => {
         console.log(action.payload);
+        // for (const product of action.payload) {
+        //     state.allProducts.push(
+        //       {
+        //         name: product.name,
+        //         categoryName: 'Salle de bains',
+        //         categorySlug: 'salle-de-bains',
+        //         subcategoryName: '',
+        //         attribute: '',
+        //         dimensions: '',
+        //         images: [...product],
+        //         description : product.description,
+        //         available: '',
+        //         collection: 'product',
+        //         collectionSlug: 'product',
+        //         slug: 'product',
+        //         subcategorySlug: 'product'
+        //       }
+        //     )
+        //   }
       })
       .addCase(findSdbProducts.pending, (state, action) => {
         console.log('pending');
