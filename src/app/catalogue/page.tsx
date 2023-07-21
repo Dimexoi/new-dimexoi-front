@@ -75,7 +75,7 @@ export default function Catalogue() {
         <div className='h-full absolute top-0 left-0 right-0 bottom-0 bg-black/40 z-10'/>
         <div>
 
-          <Image src={category.image} alt={`image ${category.name}`} width='0' height='0' sizes='100vw' className='w-full h-auto'/>
+          <Image src={`/images/category/${category.slug}.jpeg`} alt={`image ${category.name}`} width='0' height='0' sizes='100vw' className='w-full h-auto'/>
           
         </div>
         <h3 className='absolute text-white z-20'>{category.name}</h3>
@@ -104,7 +104,7 @@ export default function Catalogue() {
       
         <div className='h-full '>
 
-          <Image src={collection.image} alt={`image ${collection.name}`} width='0' height='0' sizes='100vw' className='w-auto h-full'/>
+          <Image src={`/images/collection/${collection.slug}.jpeg`} alt={`image ${collection.name}`} width='0' height='0' sizes='100vw' className='w-auto h-full'/>
         </div>
         <h3 className='absolute left-[35%] top-[2%] text-white z-20'>{collection.name}</h3>
       </Link>

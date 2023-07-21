@@ -109,7 +109,7 @@ export const findProductsTest = createAsyncThunk('product/findAllProducts', asyn
     
     const response = await axios.get('https://api.sellsy.com/v2/items/favourite-filters', {
       headers: {
-        'Authorization': "Bearer xx"
+        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
       }
     });
     console.log(response);
@@ -132,7 +132,7 @@ export const findSdbProducts = createAsyncThunk('product/findSdbProducts', async
       }
     }, {
       headers: {
-        'Authorization': "Bearer XX"
+        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
       }
     });
     console.log(response);
