@@ -84,11 +84,10 @@ export const findAllProducts = createAsyncThunk('product/findAllProducts', async
     const params = {
       type: "item",
       search: {
-        categoryid: "218960",
         tags: "website"
       },
       pagination: {
-        nbperpage: "10"
+        nbperpage: "20"
       }
     };
 
@@ -192,15 +191,15 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder
-      .addCase(findProductsTest.fulfilled, (state, action) => {
+      .addCase(findAllProducts.fulfilled, (state, action) => {
         console.log(action.payload);
         
       })
-      .addCase(findProductsTest.pending, (state, action) => {
+      .addCase(findAllProducts.pending, (state, action) => {
         console.log('pending');
         
       })
-      .addCase(findProductsTest.rejected, (state, action) => {
+      .addCase(findAllProducts.rejected, (state, action) => {
         console.log('rejected');
       })
       .addCase(findSdbProducts.fulfilled, (state, action) => {

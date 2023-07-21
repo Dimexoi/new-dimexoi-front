@@ -45,7 +45,7 @@ export default function Catalogue() {
         }
         return randomIndexes;
     }
-    dispatch(findSdbProducts());
+    dispatch(findAllProducts());
     dispatch(setAllCategories(allCategoriesJson));
     dispatch(setAllCollections(allCollectionsJson));
 
