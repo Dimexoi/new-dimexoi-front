@@ -1,22 +1,22 @@
 import { createAction, createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
 
+
+type Category = {
+  id: string
+  name: string,
+  image: string,
+  slug: string
+}
+
 export interface CategoryState {
-  allCategories : {
-    name: string,
-    image: string,
-    slug: string
-  }[],
+  allCategories : Category[],
   allCollections : {
     name: string,
     image: string,
     slug: string
   }[],
-  categoryToDisplay : {
-    name: string,
-    image: string,
-    slug: string
-  },
+  categoryToDisplay : Category,
   collectionToDisplay : {
     name: string,
     image: string,
@@ -29,6 +29,7 @@ const initialState: CategoryState = {
   allCategories: [],
   allCollections: [],
   categoryToDisplay: {
+    id: '',
     name: '',
     image: '',
     slug: ''

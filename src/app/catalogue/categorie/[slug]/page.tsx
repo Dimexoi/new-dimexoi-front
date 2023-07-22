@@ -10,7 +10,7 @@ import Head from 'next/head';
 
 import allCategoriesJson from '@/data/categories.json';
 import allProductsJson from '@/data/products.json';
-import { setProductsToDisplay } from '@/redux/features/productSlice';
+import { findProductPerCategory, setProductsToDisplay } from '@/redux/features/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setCategoryToDisplay } from '@/redux/features/categorySlice';
 import Image from 'next/image';
@@ -27,18 +27,20 @@ const Category = ({ params }: { params: { slug: string } }) => {
 
   useEffect(() => {
     if(params !== undefined) {
-
+    
+      
     const productsToDisplay = allProductsJson.filter(product => product.categorySlug === params.slug);
     let categoryToDisplay = allCategoriesJson.find(category => category.slug === params.slug);
-
-    dispatch(setProductsToDisplay(productsToDisplay));
+    if (categoryToDisplay) dispatch(findProductPerCategory(categoryToDisplay.id))
+    
+    // dispatch(setProductsToDisplay(productsToDisplay));
 
     if (categoryToDisplay) {
 
       dispatch(setCategoryToDisplay(categoryToDisplay));
 
     } else {
-      categoryToDisplay = {name: '', image: '', slug: ''}
+      categoryToDisplay = {id: '', name: '', image: '', slug: ''}
     }
 
     
@@ -56,7 +58,7 @@ const Category = ({ params }: { params: { slug: string } }) => {
       
         <div className='w-full'>
 
-          <Image src={product.images[0]} alt={`image ${product.name}`} height='0' width='0' sizes='100vw' className='w-full h-auto'/>
+          <Image src={`/images/product/${categoryToDisplay.slug}/${product.images[0]}.jpg`} alt={`image ${product.name}`} height='0' width='0' sizes='100vw' className='w-full h-auto'/>
         </div>
         <h3 className='font-poppins font-medium text-lg'>{product.name}</h3>
       </Link>

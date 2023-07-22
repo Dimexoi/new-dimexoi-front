@@ -2,72 +2,41 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
-
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-
-import {getAllCollections, getCategoryList, getProductList, getSomeSdbProducts} from '../../services/sheets';
-import { setAllCategories, setAllCollections } from '@/redux/features/categorySlice';
-import { findAllProducts, findProductsTest, findSdbProducts, setAllProducts, setSomeSdbProducts } from '@/redux/features/productSlice';
-
-import allCategoriesJson from '@/data/categories.json';
-import allProducts from '@/data/products.json';
-import allCollectionsJson from '@/data/collections.json';
 import Link from 'next/link';
 import { useEffect } from 'react';
 
-export interface MyProps {
-  allCategories : {
-    name: string,
-    imageLink: string
-  }[],
-}
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import Header from '@/components/Header';
+
+import { setAllCategories, setAllCollections } from '@/redux/features/categorySlice';
+import { findSomeSdbProducts, getCategories } from '@/redux/features/productSlice';
+
+import allCategoriesJson from '@/data/categories.json';
+import allCollectionsJson from '@/data/collections.json';
+
+// export interface MyProps {
+//   allCategories : {
+//     name: string,
+//     imageLink: string
+//   }[],
+// }
 
 export default function Catalogue() {
 
   const dispatch = useAppDispatch();
 
-  useEffect(() => {
-
-    function getRandomArbitrary(min: number, max: number, repeat: number) {
-        let start = 0;
-        let last = - 1;
-        const randomIndexes = [];
-
-        while (start < repeat) {
-        const random = Math.floor(Math.random() * (max - min) + min);
-        if (random !== last) {
-            last = random;
-            randomIndexes.push(random);
-            start++;
-        }
-        }
-        return randomIndexes;
-    }
-    dispatch(findAllProducts());
-    dispatch(setAllCategories(allCategoriesJson));
-    dispatch(setAllCollections(allCollectionsJson));
-
-    const sdbProducts = allProducts.filter(product => product.categoryName === 'Salle de bains');
-    
-    const indexesToFind = getRandomArbitrary(0, sdbProducts.length, 4);
-
-    const displayedSdbProducts = [];
-
-    for (const index in indexesToFind) {
-        displayedSdbProducts.push(sdbProducts[indexesToFind[index]])
-    }
-    
-    dispatch(setSomeSdbProducts(displayedSdbProducts));
-
-    
-  }, [])
-
   const allCategories = useAppSelector(state => state.category.allCategories);
-  const someSdbProducts = useAppSelector(state => state.product.someSdbProducts);
+  const sdbProducts = useAppSelector(state => state.product.sdbProducts);
   const allCollections = useAppSelector(state => state.category.allCollections);
 
+  useEffect(() => {
+
+    dispatch(findSomeSdbProducts());
+    dispatch(getCategories());
+    dispatch(setAllCategories(allCategoriesJson));
+    dispatch(setAllCollections(allCollectionsJson));
+    
+  }, [])
 
   const categoriesJsx = allCategories.map((category, index) => (
     <div key={index} className='relative flex justify-center items-center w-[48%] h-24 overflow-hidden mb-4 rounded-lg'>
@@ -84,13 +53,13 @@ export default function Catalogue() {
     </div>
   ));
 
-  const sdbJsx = someSdbProducts.map((product, index) => (
+  const sdbJsx = sdbProducts.map((product, index) => (
     <div key={index} className='mt-2'>
       <Link href={`/catalogue/produit/${product.slug}`}>
 
-        <Image src={product.images[0]} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
+        <Image src={`/images/product/salle-de-bains/${product.images[0]}.jpg`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
         <h3 className='font-bold'>{product.name}</h3>
-        <span className='text-sm text-gray-500'>{product.dimensions}</span>
+        {/* <span className='text-sm text-gray-500'>{product.dimensions}</span> */}
       </Link>
       
     </div>

@@ -4,6 +4,14 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import axios from 'axios'
 const Sellsy = require("node-sellsy").default
 
+type Product = {
+  id: string,
+  name: string,
+  slug: string,
+  categoryName: string,
+  images: string[]
+}
+
 export interface ProductState {
   allProducts : {
     name: string,
@@ -20,36 +28,8 @@ export interface ProductState {
     slug: string,
     subcategorySlug: string
   }[],
-  someSdbProducts : {
-    name: string,
-    categoryName: string,
-    categorySlug: string,
-    subcategoryName: string,
-    attribute: string,
-    dimensions: string,
-    images: string[],
-    description : string,
-    available: string,
-    collection: string,
-    collectionSlug: string,
-    slug: string,
-    subcategorySlug: string
-  }[],
-  productsToDisplay : {
-    name: string,
-    categoryName: string,
-    categorySlug: string,
-    subcategoryName: string,
-    attribute: string,
-    dimensions: string,
-    images: string[],
-    description : string,
-    available: string,
-    collection: string,
-    collectionSlug: string,
-    slug: string,
-    subcategorySlug: string
-  }[],
+  someSdbProducts : Product[],
+  productsToDisplay : Product[],
   displayedProduct: {
     name: string,
     categoryName: string,
@@ -64,89 +44,84 @@ export interface ProductState {
     collectionSlug: string,
     slug: string,
     subcategorySlug: string
-  }
+  },
+  sdbProducts: Product[]
 }
 
-export const findAllProducts = createAsyncThunk('product/findAllProducts', async () => {
+export const findSomeSdbProducts = createAsyncThunk('product/findSomeSdbProducts', async () => {
   try {
-    console.log('here');
-      const sellsy = new Sellsy({
-        creds: {
-        consumerKey: process.env.NEXT_PUBLIC_CONSUMER_KEY,
-        consumerSecret: process.env.NEXT_PUBLIC_CONSUMER_SECRET,
-        userToken: process.env.NEXT_PUBLIC_ACCESS_TOKEN,
-        userSecret: process.env.NEXT_PUBLIC_TOKEN_SECRET,
-      },
-      endPoint: 'https://sistms-api.onrender.com'
-    });
-
-    
-    const params = {
-      type: "item",
-      search: {
-        tags: "website"
-      },
-      pagination: {
-        nbperpage: "20"
-      }
-    };
-
-    const data = await sellsy.api({
-      method: "Catalogue.getList",
-      params: params,
-    });
-
-    return data.response.result;
-  
+    const response = await axios.post('/api/products/category/salledebains')
+    console.log(response.data.displayedSdbProducts)
+    return response.data.displayedSdbProducts;
   } catch (error) {
     console.log("error:", error);
   }
 });
 
-export const findProductsTest = createAsyncThunk('product/findAllProducts', async () => {
+export const findProductPerCategory = createAsyncThunk('product/findProductPerCategory', async (id) => {
   try {
+ const response = await axios.post('/api/products', {
+      categoryId: id
+    })
+    return response.data.products
+  } catch (error) {
+    console.log("error:", error);
+  }
+});
+
+export const getCategories = createAsyncThunk('product/getCategories', async () => {
+  try {
+    const response = await axios.post('/api/products/category/categories')
+    console.log(response.data)
+  } catch (error) {
+    console.log("error:", error);
+  }
+});
+
+// export const findProductsTest = createAsyncThunk('product/findAllProducts', async () => {
+//   try {
     
-    const response = await axios.get('https://api.sellsy.com/v2/items/favourite-filters', {
-      headers: {
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
-      }
-    });
-    console.log(response);
+//     const response = await axios.get('https://api.sellsy.com/v2/items/favourite-filters', {
+//       headers: {
+//         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
+//       }
+//     });
+//     console.log(response);
      
   
-  } catch (error) {
-    console.log("error:", error);
-  }
-});
+//   } catch (error) {
+//     console.log("error:", error);
+//   }
+// });
 
-export const findSdbProducts = createAsyncThunk('product/findSdbProducts', async () => {
-  try {
+// export const findSdbProducts = createAsyncThunk('product/findSdbProducts', async () => {
+//   try {
     
-    const response = await axios.post('https://api.sellsy.com/v2/items/search',{
-      "filters": {
-        "type": [
-          "product"
-        ],
-        "favourite_filter": 438873
-      }
-    },{
-      params: {
-        field: ['']
-      },
-      headers: {
-        'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
-      }
-    });
-    console.log(response);
-    const fetchedProducts = response.data;
+//     const response = await axios.post('https://api.sellsy.com/v2/items/search',{
+//       "filters": {
+//         "type": [
+//           "product"
+//         ],
+//         "favourite_filter": 438873
+//       }
+//     },{
+//       params: {
+//         field: ['']
+//       },
+//       headers: {
+//         'Authorization': `Bearer ${process.env.NEXT_PUBLIC_AUTH_TOKEN}`
+//       }
+//     });
+//     console.log(response);
+//     const fetchedProducts = response.data;
 
-    return(response.data)
+//     return(response.data)
      
   
-  } catch (error) {
-    console.log("error:", error);
-  }
-});
+//   } catch (error) {
+//     console.log("error:", error);
+//   }
+// });
 
 // Define the initial state using that type
 const initialState: ProductState = {
@@ -167,7 +142,8 @@ const initialState: ProductState = {
     collectionSlug: '',
     slug: '',
     subcategorySlug: ''
-  }
+  },
+  sdbProducts: []
 }
 
 export const productSlice = createSlice({
@@ -191,45 +167,49 @@ export const productSlice = createSlice({
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder
-      .addCase(findAllProducts.fulfilled, (state, action) => {
-        console.log(action.payload);
+      .addCase(findSomeSdbProducts.fulfilled, (state, action) => {
+        state.sdbProducts = action.payload
         
       })
-      .addCase(findAllProducts.pending, (state, action) => {
+      .addCase(findSomeSdbProducts.pending, (state, action) => {
         console.log('pending');
         
       })
-      .addCase(findAllProducts.rejected, (state, action) => {
+      .addCase(findSomeSdbProducts.rejected, (state, action) => {
         console.log('rejected');
       })
-      .addCase(findSdbProducts.fulfilled, (state, action) => {
-        console.log(action.payload);
-        // for (const product of action.payload) {
-        //     state.allProducts.push(
-        //       {
-        //         name: product.name,
-        //         categoryName: 'Salle de bains',
-        //         categorySlug: 'salle-de-bains',
-        //         subcategoryName: '',
-        //         attribute: '',
-        //         dimensions: '',
-        //         images: [...product],
-        //         description : product.description,
-        //         available: '',
-        //         collection: 'product',
-        //         collectionSlug: 'product',
-        //         slug: 'product',
-        //         subcategorySlug: 'product'
-        //       }
-        //     )
-        //   }
+      .addCase(findProductPerCategory.fulfilled, (state, action) => {
+        state.productsToDisplay = action.payload
+        
       })
-      .addCase(findSdbProducts.pending, (state, action) => {
+      .addCase(findProductPerCategory.pending, (state, action) => {
         console.log('pending');
+        
       })
-      .addCase(findSdbProducts.rejected, (state, action) => {
+      .addCase(findProductPerCategory.rejected, (state, action) => {
         console.log('rejected');
       })
+      .addCase(getCategories.fulfilled, (state, action) => {
+        console.log('en cours')
+        
+      })
+      .addCase(getCategories.pending, (state, action) => {
+        console.log('pending');
+        
+      })
+      .addCase(getCategories.rejected, (state, action) => {
+        console.log('rejected');
+      })
+      // .addCase(findSdbProducts.fulfilled, (state, action) => {
+      //   console.log(action.payload);
+        
+      // })
+      // .addCase(findSdbProducts.pending, (state, action) => {
+      //   console.log('pending');
+      // })
+      // .addCase(findSdbProducts.rejected, (state, action) => {
+      //   console.log('rejected');
+      // })
   },
 })
 

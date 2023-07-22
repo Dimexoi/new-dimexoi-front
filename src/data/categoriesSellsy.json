@@ -1,0 +1,407 @@
+{
+  "response": [
+    {
+      "id": "179457",
+      "name": "Cuisine",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "0"
+    },
+    {
+      "id": "280454",
+      "name": "CHAUD",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "0"
+    },
+    {
+      "id": "77611",
+      "name": "Tables",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "1",
+      "children": [
+        {
+          "id": "77612",
+          "name": "Tables de Salon",
+          "description": "",
+          "parentid": "77611",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "77613",
+          "name": "Tables Salle à Manger",
+          "description": "",
+          "parentid": "77611",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "1"
+        },
+        {
+          "id": "77614",
+          "name": "Tables de Jardin",
+          "description": "",
+          "parentid": "77611",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "2"
+        }
+      ]
+    },
+    {
+      "id": "179449",
+      "name": "Rangement",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "2",
+      "children": [
+        {
+          "id": "237630",
+          "name": "Etagères",
+          "description": "",
+          "parentid": "179449",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "179450",
+          "name": "Console",
+          "description": "",
+          "parentid": "179449",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "179451",
+          "name": "Meuble chaussures",
+          "description": "",
+          "parentid": "179449",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "1"
+        },
+        {
+          "id": "179452",
+          "name": "Meuble escaliers",
+          "description": "",
+          "parentid": "179449",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "2"
+        },
+        {
+          "id": "179453",
+          "name": "Meuble d'angle",
+          "description": "",
+          "parentid": "179449",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "3"
+        }
+      ]
+    },
+    {
+      "id": "77162",
+      "name": "Salle de bains",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "3",
+      "children": [
+        {
+          "id": "218960",
+          "name": "Meubles sous vasque(s)",
+          "description": "",
+          "parentid": "77162",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "77401",
+          "name": "Vasques",
+          "description": "",
+          "parentid": "77162",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "1"
+        },
+        {
+          "id": "77684",
+          "name": "Miroirs",
+          "description": "",
+          "parentid": "77162",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "2"
+        },
+        {
+          "id": "77163",
+          "name": "Colonnes",
+          "description": "",
+          "parentid": "77162",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "3"
+        }
+      ]
+    },
+    {
+      "id": "77685",
+      "name": "Appoint",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "4"
+    },
+    {
+      "id": "77640",
+      "name": "Extérieur",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "5",
+      "children": [
+        {
+          "id": "77641",
+          "name": "Salon d'extérieur",
+          "description": "",
+          "parentid": "77640",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        }
+      ]
+    },
+    {
+      "id": "77638",
+      "name": "Bureaux",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "6"
+    },
+    {
+      "id": "77617",
+      "name": "Chaises",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "7",
+      "children": [
+        {
+          "id": "77618",
+          "name": "Canapés",
+          "description": "",
+          "parentid": "77617",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "200293",
+          "name": "Tabourets",
+          "description": "",
+          "parentid": "77617",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "1"
+        },
+        {
+          "id": "77619",
+          "name": "Fauteuils",
+          "description": "",
+          "parentid": "77617",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "2"
+        }
+      ]
+    },
+    {
+      "id": "77620",
+      "name": "Chambre",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "8",
+      "children": [
+        {
+          "id": "77621",
+          "name": "Lits",
+          "description": "",
+          "parentid": "77620",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "77632",
+          "name": "Literie",
+          "description": "",
+          "parentid": "77620",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "1"
+        },
+        {
+          "id": "200292",
+          "name": "Dressings",
+          "description": "Dressings ouverts ou fermés",
+          "parentid": "77620",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "2"
+        },
+        {
+          "id": "77622",
+          "name": "Armoires",
+          "description": "",
+          "parentid": "77620",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "3"
+        },
+        {
+          "id": "77623",
+          "name": "Commodes",
+          "description": "",
+          "parentid": "77620",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "4"
+        },
+        {
+          "id": "77639",
+          "name": "Tables de chevet",
+          "description": "",
+          "parentid": "77620",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "5"
+        }
+      ]
+    },
+    {
+      "id": "77402",
+      "name": "Séjour",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "9",
+      "children": [
+        {
+          "id": "77615",
+          "name": "Télévision",
+          "description": "",
+          "parentid": "77402",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "179448",
+          "name": "Living",
+          "description": "",
+          "parentid": "77402",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "1"
+        },
+        {
+          "id": "77624",
+          "name": "Bibliothèques",
+          "description": "",
+          "parentid": "77402",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "2"
+        },
+        {
+          "id": "77403",
+          "name": "Buffets",
+          "description": "",
+          "parentid": "77402",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "3"
+        }
+      ]
+    },
+    {
+      "id": "77686",
+      "name": "Bars",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "10",
+      "children": [
+        {
+          "id": "77637",
+          "name": "Chaises de bar",
+          "description": "",
+          "parentid": "77686",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "0"
+        },
+        {
+          "id": "77636",
+          "name": "Tables de bar",
+          "description": "",
+          "parentid": "77686",
+          "logo": "",
+          "corpid": "65284",
+          "rank": "1"
+        }
+      ]
+    },
+    {
+      "id": "77633",
+      "name": "Décoration",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "11"
+    },
+    {
+      "id": "77634",
+      "name": "Accessoires",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "12"
+    },
+    {
+      "id": "77644",
+      "name": "Autres",
+      "description": "",
+      "parentid": "0",
+      "logo": "",
+      "corpid": "65284",
+      "rank": "13"
+    }
+  ]
+}

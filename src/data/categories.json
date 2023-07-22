@@ -1,40 +1,48 @@
 [
   {
+    "id": "77638",
       "name": "Bureau",
       "image": "https://drive.google.com/uc?export=view&id=1sycR_6grJTX7DG8GqyXqs-WrcDAbZJoy",
       "slug": "bureau"
   },
   {
+    "id": "77620",
       "name": "Chambre",
       "image": "https://drive.google.com/uc?export=view&id=1fd8AWxV3fh7lfaEgvC8wwX8-hkVsVs_N",
       "slug": "chambre"
   },
   {
+    "id": "179457",
       "name": "Cuisine",
       "image": "https://drive.google.com/uc?export=view&id=1U3LDXopHLbSvUUO6LSvedfJNaZwbyw2M",
       "slug": "cuisine"
   },
   {
+    "id": "",
       "name": "Entrée",
       "image": "https://drive.google.com/uc?export=view&id=1KgJQOuijH84DRM6NmH4An97ifg-5quK2",
       "slug": "entree"
   },
   {
+    "id": "77640",
       "name": "Extérieur",
       "image": "https://drive.google.com/uc?export=view&id=1O2uehp7xixsjEQM7dBlsp-nRKbP8Dx88",
       "slug": "exterieur"
   },
   {
+    "id": "77162",
       "name": "Salle de bains",
       "image": "https://drive.google.com/uc?export=view&id=1fk_Z6ZFaQ0k9NvyS6dJ3TatEBb8THtsI",
       "slug": "salle-de-bains"
   },
   {
+    "id": "",
       "name": "Salon",
       "image": "https://drive.google.com/uc?export=view&id=1zU1ZTX-f-FkIXbunHq3ZWQ8NATrC-PGa",
       "slug": "salon"
   },
   {
+    "id": "77402",
       "name": "Séjour",
       "image": "https://drive.google.com/uc?export=view&id=1j1450Pp7e_rFc_tWu7A_fXnVTXebep7v",
       "slug": "sejour"
