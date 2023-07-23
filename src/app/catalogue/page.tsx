@@ -36,7 +36,7 @@ export default function Catalogue() {
     dispatch(setAllCategories(allCategoriesJson));
     dispatch(setAllCollections(allCollectionsJson));
     
-  }, [])
+  }, [dispatch])
 
   const categoriesJsx = allCategories.map((category, index) => (
     <div key={index} className='relative flex justify-center items-center w-[48%] h-24 overflow-hidden mb-4 rounded-lg'>
