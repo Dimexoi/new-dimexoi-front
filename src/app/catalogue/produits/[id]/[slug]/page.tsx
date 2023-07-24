@@ -55,6 +55,7 @@ const Product = ({ params }: { params: { id: string, slug: string } }) => {
             collectionSlug: '',
             slug: '',
             categoryName: '',
+            categorySlug: '',
             images: []
           }
         }
@@ -99,7 +100,7 @@ const Product = ({ params }: { params: { id: string, slug: string } }) => {
         <h1 className='mt-3 text-center text-3xl font-poppins font-bold'>{displayedProduct.name}</h1>
         
         <div>
-          <Carousel images={displayedProduct.images} category={categoryToDisplay.slug}/>
+          <Carousel images={displayedProduct.images} category={displayedProduct.categorySlug}/>
           <p className='font-raleway font-light text-xs text-center'>*Peut être disponible en une finition différente de celle de la photo</p>
         </div>
 

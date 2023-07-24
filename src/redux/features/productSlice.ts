@@ -10,6 +10,7 @@ type Product = {
   description: string,
   slug: string,
   categoryName: string,
+  categorySlug: string,
   images: string[],
   collectionSlug: string
 }
@@ -45,7 +46,7 @@ export const findSomeSdbProducts = createAsyncThunk('product/findSomeSdbProducts
   }
 });
 
-export const findProductPerCategory = createAsyncThunk('product/findProductPerCategory', async (id) => {
+export const findProductPerCategory = createAsyncThunk('product/findProductPerCategory', async (id: string) => {
   try {
  const response = await axios.post('/api/products', {
       categoryId: id
@@ -64,7 +65,7 @@ export const getCategories = createAsyncThunk('product/getCategories', async () 
   }
 });
 
-export const getOneProduct = createAsyncThunk('product/getOneProduct', async (id) => {
+export const getOneProduct = createAsyncThunk('product/getOneProduct', async (id: string) => {
   try {
     const response = await axios.post('/api/products/getone',{
       productId: id
@@ -132,6 +133,7 @@ const initialState: ProductState = {
     description: '',
     slug: '',
     categoryName: '',
+    categorySlug: '',
     images: [],
     collectionSlug: ''
   },
@@ -161,36 +163,21 @@ export const productSlice = createSlice({
     builder
       .addCase(findSomeSdbProducts.fulfilled, (state, action) => {
         state.sdbProducts = action.payload
-        
       })
       .addCase(findSomeSdbProducts.pending, (state, action) => {
-        console.log('pending');
         
       })
       .addCase(findSomeSdbProducts.rejected, (state, action) => {
-        console.log('rejected');
+
       })
       .addCase(findProductPerCategory.fulfilled, (state, action) => {
-        state.productsToDisplay = action.payload
-        
+        state.productsToDisplay = action.payload  
       })
       .addCase(findProductPerCategory.pending, (state, action) => {
-        console.log('pending');
-        
+    
       })
       .addCase(findProductPerCategory.rejected, (state, action) => {
-        console.log('rejected');
-      })
-      .addCase(getCategories.fulfilled, (state, action) => {
-        console.log('en cours')
-        
-      })
-      .addCase(getCategories.pending, (state, action) => {
-        console.log('pending');
-        
-      })
-      .addCase(getCategories.rejected, (state, action) => {
-        console.log('rejected');
+
       })
       .addCase(getOneProduct.fulfilled, (state, action) => {
         state.displayedProduct = action.payload        

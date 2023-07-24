@@ -1,6 +1,17 @@
 import { NextResponse } from 'next/server'
 const Sellsy = require("node-sellsy").default
- 
+
+type CatObj = {
+  id: string,
+  name: string,
+  description: string,
+  parentid: string,
+  logo: string,
+  corpid: string,
+  rank: string,
+  slug: string
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json() // res now contains body
@@ -14,8 +25,6 @@ export async function POST(req: Request) {
     endPoint: 'https://apifeed.sellsy.com/0/'
     })
 
-    console.log(body);
-
     const params = {
       type: "item",
       id : body.productId
@@ -26,13 +35,14 @@ export async function POST(req: Request) {
       params: params,
     });
 
-    console.log(data.response.categories);
+    const {slug} = Object.values(data.response.categories)[0] as CatObj
+    
     const result = data.response
 
     const product = {
       id:  result.id,
       name: result.tradename,
-      category:  result.categories.slug,
+      categorySlug:  slug,
       slug:  result.slug,
       images: result.customfields[2].formatted_value.split(',')
     } 
