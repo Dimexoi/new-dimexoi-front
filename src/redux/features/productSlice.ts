@@ -7,9 +7,11 @@ const Sellsy = require("node-sellsy").default
 type Product = {
   id: string,
   name: string,
+  description: string,
   slug: string,
   categoryName: string,
-  images: string[]
+  images: string[],
+  collectionSlug: string
 }
 
 export interface ProductState {
@@ -30,28 +32,13 @@ export interface ProductState {
   }[],
   someSdbProducts : Product[],
   productsToDisplay : Product[],
-  displayedProduct: {
-    name: string,
-    categoryName: string,
-    categorySlug: string,
-    subcategoryName: string,
-    attribute: string,
-    dimensions: string,
-    images: string[],
-    description : string,
-    available: string,
-    collection: string,
-    collectionSlug: string,
-    slug: string,
-    subcategorySlug: string
-  },
+  displayedProduct: Product,
   sdbProducts: Product[]
 }
 
 export const findSomeSdbProducts = createAsyncThunk('product/findSomeSdbProducts', async () => {
   try {
     const response = await axios.post('/api/products/category/salledebains')
-    console.log(response.data.displayedSdbProducts)
     return response.data.displayedSdbProducts;
   } catch (error) {
     console.log("error:", error);
@@ -72,11 +59,22 @@ export const findProductPerCategory = createAsyncThunk('product/findProductPerCa
 export const getCategories = createAsyncThunk('product/getCategories', async () => {
   try {
     const response = await axios.post('/api/products/category/categories')
-    console.log(response.data)
   } catch (error) {
     console.log("error:", error);
   }
 });
+
+export const getOneProduct = createAsyncThunk('product/getOneProduct', async (id) => {
+  try {
+    const response = await axios.post('/api/products/getone',{
+      productId: id
+    })
+    return response.data;
+  } catch (error) {
+    console.log("error:", error);
+  }
+});
+
 
 // export const findProductsTest = createAsyncThunk('product/findAllProducts', async () => {
 //   try {
@@ -129,19 +127,13 @@ const initialState: ProductState = {
   someSdbProducts: [],
   productsToDisplay: [],
   displayedProduct: {
+    id: '',
     name: '',
-    categoryName: '',
-    categorySlug: '',
-    subcategoryName: '',
-    attribute: '',
-    dimensions: '',
-    images: [],
-    description : '',
-    available: '',
-    collection:'',
-    collectionSlug: '',
+    description: '',
     slug: '',
-    subcategorySlug: ''
+    categoryName: '',
+    images: [],
+    collectionSlug: ''
   },
   sdbProducts: []
 }
@@ -198,6 +190,16 @@ export const productSlice = createSlice({
         
       })
       .addCase(getCategories.rejected, (state, action) => {
+        console.log('rejected');
+      })
+      .addCase(getOneProduct.fulfilled, (state, action) => {
+        state.displayedProduct = action.payload        
+      })
+      .addCase(getOneProduct.pending, (state, action) => {
+        console.log('pending');
+        
+      })
+      .addCase(getOneProduct.rejected, (state, action) => {
         console.log('rejected');
       })
       // .addCase(findSdbProducts.fulfilled, (state, action) => {

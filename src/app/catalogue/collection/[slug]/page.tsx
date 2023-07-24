@@ -47,7 +47,7 @@ const Collection = ({ params }: { params: { slug: string } }) => {
   const productJsx = productsToDisplay.map((product, index) => (
     <div key={index} className='mb-3'>
 
-      <Link href={`/catalogue/produit/${product.slug}`}>
+      <Link href={`/catalogue/produits/${product.slug}`}>
       
         <div className='w-full'>
 
