@@ -46,7 +46,7 @@ const Category = ({ params }: { params: { slug: string } }) => {
     
 
   } 
-  }, [])
+  }, [params, dispatch])
 
   const productsToDisplay = useAppSelector(state => state.product.productsToDisplay);
   const categoryToDisplay = useAppSelector(state => state.category.categoryToDisplay);

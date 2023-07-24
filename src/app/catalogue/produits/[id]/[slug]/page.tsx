@@ -82,7 +82,7 @@ const Product = ({ params }: { params: { id: string, slug: string } }) => {
   
     } 
     
-  }, [])
+  }, [dispatch, params, productsToDisplay])
 
   
 
