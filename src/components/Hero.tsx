@@ -3,7 +3,7 @@ import React from 'react';
 
 const Hero = () => {
   return (
-    <div className='h-[80vh] flex items-center justify-center bg-[center_right_-6rem] md:bg-[center_right] bg-no-repeat bg-cover custom-img bg-fixed'>
+    <div className='h-[80vh] flex items-center justify-center bg-[center_right_-6rem] md:bg-[center_right] bg-no-repeat bg-cover custom-img bg-fixed mb-2'>
       <div className='h-[80vh] absolute top-0 left-0 right-0 bottom-0 bg-black/70 z-10'/>
       <div className='p-5 text-white z-10'>
 

@@ -16,11 +16,11 @@ const frameTexts = ['Modélisation 3D sur rendez-vous', 'Conseils', 'Demande de 
 
 const CustomMade = () => {
   return (
-    <section className='mt-4'>
+    <section className='p-3 mb-2'>
 
           <h3 className='text-3xl text-[#528BA8] font-raleway font-bold text-center'>Un meuble sur mesure en teck</h3>
 
-          <p className='mt-1 px-6 py-3 text-justify'>Si vous ne trouvez pas votre bonheur, nous proposons également un service sur-mesure . C&apos;est vous qui créez votre propre mobilier, afin qu&apos;il soit unique et d&apos;épouser les dimensions de votre espace.</p>      
+          <p className='mt-1 py-3 text-justify'>Si vous ne trouvez pas votre bonheur, nous proposons également un service sur-mesure . C&apos;est vous qui créez votre propre mobilier, afin qu&apos;il soit unique et d&apos;épouser les dimensions de votre espace.</p>      
           
           <div className='flex flex-col md:flex-row'>
             <div>

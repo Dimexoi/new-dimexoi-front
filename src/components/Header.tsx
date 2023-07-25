@@ -36,13 +36,14 @@ const Header = ({home}: myProps) => {
 
   return (
     <div className={home ? hasScroll ?
-      'fixed left-0 top-0 z-30 w-full items-center justify-between flex bg-white text-black pt-8 pb-8 px-5'
+      'fixed left-0 top-0 z-30 w-full items-center justify-between flex bg-white text-black py-8 px-5 drop-shadow-xl duration-300'
     :
-      'fixed left-0 top-0 z-30 w-full items-center justify-between flex text-white pt-8 pb-8 px-5'
+      'fixed left-0 top-0 z-30 w-full items-center justify-between flex text-white py-8 pb-8 px-5 duration-300'
     : hasScroll ?
-      'sticky left-0 top-0 z-30 w-full items-center justify-between flex bg-white text-black pt-8 pb-8 px-5'
+      'sticky left-0 top-0 z-30 w-full items-center justify-between flex bg-white text-black py-8 pb-8 px-5 drop-shadow-xl duration-300'
     :
-      'sticky left-0 top-0 z-30 w-full items-center justify-between flex bg-black text-white pt-8 pb-8 px-5'}
+      'sticky left-0 top-0 z-30 w-full items-center justify-between flex bg-black text-white py-8 pb-8 px-5 duration-300'}
+
     >
       {home ? 
         <Link href='/'>

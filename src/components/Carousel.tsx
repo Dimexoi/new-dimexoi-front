@@ -52,7 +52,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, category }) => {
             className={`absolute top-0 left-0 h-full w-full object-cover transition-opacity duration-500 ${
               index === currentIndex ? 'opacity-100' : 'opacity-0'
             }`}
-            src={`/images/product/${category}/${image}.jpg`}
+            src={`/images/product/${category}/${image}`}
             alt={`Image ${index}`}
           />
         ))}
@@ -65,7 +65,7 @@ const ImageCarousel: React.FC<ImageCarouselProps> = ({ images, category }) => {
             className={`h-12 w-12 object-cover mx-2 ${
               index === currentIndex ? 'border-2 border-blue-500' : ''
             }`}
-            src={`/images/product/${category}/${image}.jpg`}
+            src={`/images/product/${category}/${image}`}
             alt={`Thumbnail ${index}`}
             onClick={() => handleImageClick(index)}
           />

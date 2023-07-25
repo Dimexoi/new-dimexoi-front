@@ -37,10 +37,12 @@ export async function POST(req) {
         id:  result[product].id,
         name: result[product].tradename,
         category:  result[product].categoryName,
+        categorySlug: 'test',
         slug:  result[product].slug,
         images: result[product].customfields[2].textval.split(',')
       })
     }
+    console.log(result);
    
     return NextResponse.json({ products })
   

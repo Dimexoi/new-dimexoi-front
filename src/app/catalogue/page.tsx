@@ -57,7 +57,7 @@ export default function Catalogue() {
     <div key={index} className='mt-2'>
       <Link href={`/catalogue/produit/${product.slug}`}>
 
-        <Image src={`/images/product/salle-de-bains/${product.images[0]}.jpg`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
+        <Image src={`/images/product/salle-de-bains/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
         <h3 className='font-bold'>{product.name}</h3>
         {/* <span className='text-sm text-gray-500'>{product.dimensions}</span> */}
       </Link>
@@ -112,7 +112,7 @@ export default function Catalogue() {
 
           </div>
 
-          <Link href='/catalogue/categorie/salle-de-bains' className='inline-block mt-4 border-2 border-black px-5 py-2 text-lg'>Tous le mobilier de salle de bains</Link>
+          <Link href='/catalogue/categorie/salle-de-bains' className='inline-block mt-4 border-2 border-black px-5 py-2 text-lg rounded-lg'>Tous le mobilier de salle de bains</Link>
         </div>
 
         <h2 className='mt-4 text-2xl text-[#528BA8] font-raleway font-bold'>Nos collections</h2>

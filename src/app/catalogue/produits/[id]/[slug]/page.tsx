@@ -41,8 +41,8 @@ const Product = ({ params }: { params: { id: string, slug: string } }) => {
       
       if (productsToDisplay.length > 0) {
 
-        let displayedProduct = productsToDisplay.find(product => product.slug === params.slug);
-        let categoryToDisplay = allCategoriesJson.find(category => category.slug === params.slug);
+        let displayedProduct = productsToDisplay.find(product => product.id === params.id);
+        let categoryToDisplayJson = allCategoriesJson.find(category => category.slug === displayedProduct?.categorySlug);
         let collectionToDisplay = allCollectionsJson.find(collection => collection.slug === displayedProduct?.collectionSlug);
     
         if (displayedProduct) {
@@ -60,12 +60,12 @@ const Product = ({ params }: { params: { id: string, slug: string } }) => {
           }
         }
     
-        if (categoryToDisplay) {
+        if (categoryToDisplayJson) {
     
-          dispatch(setCategoryToDisplay(categoryToDisplay));
+          dispatch(setCategoryToDisplay(categoryToDisplayJson));
     
         } else {
-          categoryToDisplay = {id: '', name: '', image: '', slug: ''}
+          categoryToDisplayJson = {id: '', name: '', image: '', slug: ''}
         }
     
         if (collectionToDisplay) {
@@ -100,7 +100,7 @@ const Product = ({ params }: { params: { id: string, slug: string } }) => {
         <h1 className='mt-3 text-center text-3xl font-poppins font-bold'>{displayedProduct.name}</h1>
         
         <div>
-          <Carousel images={displayedProduct.images} category={displayedProduct.categorySlug}/>
+          <Carousel images={displayedProduct.images} category={categoryToDisplay.slug  ? categoryToDisplay.slug : displayedProduct.categorySlug}/>
           <p className='font-raleway font-light text-xs text-center'>*Peut être disponible en une finition différente de celle de la photo</p>
         </div>
 

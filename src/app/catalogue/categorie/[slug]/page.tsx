@@ -1,15 +1,12 @@
 'use client'
 
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import Head from 'next/head';
 
 import allCategoriesJson from '@/data/categories.json';
-import allProductsJson from '@/data/products.json';
 import { findProductPerCategory, setProductsToDisplay } from '@/redux/features/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setCategoryToDisplay } from '@/redux/features/categorySlice';
@@ -28,8 +25,6 @@ const Category = ({ params }: { params: { slug: string } }) => {
   useEffect(() => {
     if(params !== undefined) {
     
-      
-    const productsToDisplay = allProductsJson.filter(product => product.categorySlug === params.slug);
     let categoryToDisplay = allCategoriesJson.find(category => category.slug === params.slug);
     if (categoryToDisplay) dispatch(findProductPerCategory(categoryToDisplay.id))
     
@@ -58,7 +53,7 @@ const Category = ({ params }: { params: { slug: string } }) => {
       
         <div className='w-full'>
 
-          <Image src={`/images/product/${categoryToDisplay.slug}/${product.images[0]}.jpg`} alt={`image ${product.name}`} height='0' width='0' sizes='100vw' className='w-full h-auto'/>
+          <Image src={`/images/product/${categoryToDisplay.slug}/${product.images[0]}`} alt={`image ${product.name}`} height='0' width='0' sizes='100vw' className='w-full h-auto'/>
         </div>
         <h3 className='font-poppins font-medium text-lg'>{product.name}</h3>
       </Link>

@@ -25,7 +25,7 @@ export default function Home() {
 
         <CustomMade/>
 
-        <section className='mt-4 p-4 flex flex-col items-center'>
+        <section className='p-4 flex flex-col items-center'>
 
           <h3 className='text-3xl text-[#528BA8] font-raleway font-bold text-center'>Le mobilier en teck à La Réunion</h3>
 
@@ -49,7 +49,7 @@ export default function Home() {
 
           <div className='mt-4 w-full px-10'>
 
-            <div className='flex justify-between text-gray-400'> <span>Lundi</span> <span>Fermé</span></div>
+            <div className='flex justify-between'> <span>Lundi</span> <span>9h00 - 17h00</span></div>
             <div className='flex justify-between'> <span>Mardi</span> <span>9h00 - 17h00</span></div>
             <div className='flex justify-between'> <span>Mercredi</span> <span>9h00 - 17h00</span></div>
             <div className='flex justify-between'> <span>Jeudi</span> <span>9h00 - 17h00</span></div>
