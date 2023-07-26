@@ -1,3 +1,5 @@
+'use client'
+
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,7 +13,6 @@ import { findSomeSdbProducts, getCategories } from '@/redux/features/productSlic
 
 import allCategoriesJson from '@/data/categories.json';
 import allCollectionsJson from '@/data/collections.json';
-import { store } from '@/redux/store';
 
 // export interface MyProps {
 //   allCategories : {
@@ -20,29 +21,22 @@ import { store } from '@/redux/store';
 //   }[],
 // }
 
-async function getSdbProducts() {
-  await store.dispatch(findSomeSdbProducts())
-}
+export default function Catalogue() {
 
-async function findCategories() {
-  store.dispatch(setAllCategories(allCategoriesJson))
-}
+  const dispatch = useAppDispatch();
 
-async function findCollections() {
-  store.dispatch(setAllCollections(allCollectionsJson))
-}
+  const allCategories = useAppSelector(state => state.category.allCategories);
+  const sdbProducts = useAppSelector(state => state.product.sdbProducts);
+  const allCollections = useAppSelector(state => state.category.allCollections);
 
-export default async function Catalogue() {
+  useEffect(() => {
 
-  await findCategories()
-  await findCollections()
-  await getSdbProducts()
-
-  const state = store.getState()
-
-  const {allCategories} = state.category
-  const {sdbProducts} = state.product
-  const {allCollections} = state.category
+    dispatch(findSomeSdbProducts());
+    dispatch(getCategories());
+    dispatch(setAllCategories(allCategoriesJson));
+    dispatch(setAllCollections(allCollectionsJson));
+    
+  }, [dispatch])
 
   const categoriesJsx = allCategories.map((category, index) => (
     <div key={index} className='relative flex justify-center items-center w-[48%] h-24 overflow-hidden mb-4 rounded-lg'>
@@ -61,7 +55,7 @@ export default async function Catalogue() {
 
   const sdbJsx = sdbProducts.map((product, index) => (
     <div key={index} className='mt-2'>
-      <Link href={`/catalogue/produits/${product.id}/${product.slug}`}>
+      <Link href={`/catalogue/produit/${product.slug}`}>
 
         <Image src={`/images/product/salle-de-bains/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
         <h3 className='font-bold'>{product.name}</h3>

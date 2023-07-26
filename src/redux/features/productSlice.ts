@@ -39,7 +39,7 @@ export interface ProductState {
 
 export const findSomeSdbProducts = createAsyncThunk('product/findSomeSdbProducts', async () => {
   try {
-    const response = await axios.post('/api/products/category/salledebains')
+    const response = await axios.post('http://localhost:3000/api/products/category/salledebains')
     return response.data.displayedSdbProducts;
   } catch (error) {
     console.log("error:", error);
