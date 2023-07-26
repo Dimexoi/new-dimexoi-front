@@ -67,7 +67,7 @@ export const getCategories = createAsyncThunk('product/getCategories', async () 
 
 export const getOneProduct = createAsyncThunk('product/getOneProduct', async (id: string) => {
   try {
-    const response = await axios.post('/api/products/getone',{
+    const response = await axios.post('http://localhost:3000/api/products/getone',{
       productId: id
     })
     return response.data;
@@ -180,6 +180,10 @@ export const productSlice = createSlice({
 
       })
       .addCase(getOneProduct.fulfilled, (state, action) => {
+        console.log('finish')
+        console.log(action.payload  )
+        console.log('finish')
+
         state.displayedProduct = action.payload        
       })
       .addCase(getOneProduct.pending, (state, action) => {

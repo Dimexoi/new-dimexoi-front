@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect } from 'react';
+import { Suspense } from 'react';
 
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import Header from '@/components/Header';
@@ -12,6 +12,7 @@ import { findSomeSdbProducts, getCategories } from '@/redux/features/productSlic
 import allCategoriesJson from '@/data/categories.json';
 import allCollectionsJson from '@/data/collections.json';
 import { store } from '@/redux/store';
+import ItemList from '@/components/ItemList';
 
 // export interface MyProps {
 //   allCategories : {
@@ -21,7 +22,19 @@ import { store } from '@/redux/store';
 // }
 
 async function getSdbProducts() {
-  await store.dispatch(findSomeSdbProducts())
+  const res = await fetch('http://localhost:3000/api/products/category/salledebains', {
+    method: 'POST',
+  })
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+  
+  return res.json()
 }
 
 async function findCategories() {
@@ -36,7 +49,8 @@ export default async function Catalogue() {
 
   await findCategories()
   await findCollections()
-  await getSdbProducts()
+  const promise = getSdbProducts()
+  // await getSdbProducts()
 
   const state = store.getState()
 
@@ -59,17 +73,17 @@ export default async function Catalogue() {
     </div>
   ));
 
-  const sdbJsx = sdbProducts.map((product, index) => (
-    <div key={index} className='mt-2'>
-      <Link href={`/catalogue/produits/${product.id}/${product.slug}`}>
+  // const sdbJsx = sdbProducts.map((product, index) => (
+  //   <div key={product.id} className='mt-2'>
+  //     <Link href={`/catalogue/produits/${product.id}/${product.slug}`}>
 
-        <Image src={`/images/product/salle-de-bains/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
-        <h3 className='font-bold'>{product.name}</h3>
-        {/* <span className='text-sm text-gray-500'>{product.dimensions}</span> */}
-      </Link>
+  //       <Image src={`/images/product/salle-de-bains/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
+  //       <h3 className='font-bold'>{product.name}</h3>
+  //       {/* <span className='text-sm text-gray-500'>{product.dimensions}</span> */}
+  //     </Link>
       
-    </div>
-  ))
+  //   </div>
+  // ))
 
   const collectionssJsx = allCollections.map((collection, index) => (
     <div key={index} className='relative flex justify-center items-center w-[48%] aspect-h-1 aspect-w-2 overflow-hidden mb-4 rounded-lg'>
@@ -113,8 +127,12 @@ export default async function Catalogue() {
           <h2 className='mt-4 text-2xl text-[#528BA8] font-raleway font-bold self-start'>Meubles de salle de bains</h2>
           
           <div>
-
-            {sdbJsx}
+            <Suspense fallback={<img src='/images/loading.gif' alt='loading image'/>}>
+              <ItemList
+                getData={promise}
+                items={sdbProducts}
+              />
+            </Suspense>
 
           </div>
 

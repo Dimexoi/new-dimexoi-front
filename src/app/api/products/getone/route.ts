@@ -27,7 +27,7 @@ export async function POST(req: Request) {
 
     const params = {
       type: "item",
-      id : body.productId
+      id : body
     };
 
     const data = await sellsy.api({

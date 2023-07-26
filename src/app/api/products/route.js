@@ -42,7 +42,6 @@ export async function POST(req) {
         images: result[product].customfields[2].textval.split(',')
       })
     }
-    console.log(result);
    
     return NextResponse.json({ products })
   
