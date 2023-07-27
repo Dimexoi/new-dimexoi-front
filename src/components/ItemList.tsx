@@ -12,6 +12,7 @@ type Product = {
   categorySlug: string,
   images: string[],
   collectionSlug: string
+  collectionName: string
 }
 
 type ApiReturn = {

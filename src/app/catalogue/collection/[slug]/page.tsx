@@ -1,21 +1,16 @@
-'use client'
-
-import Link from 'next/link';
-import { useRouter } from 'next/router';
-import React, { useEffect } from 'react';
+import React, { Suspense } from 'react';
 
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import Head from 'next/head';
 
 import allCategoriesJson from '@/data/categories.json';
-import allProductsJson from '@/data/products.json';
-import allCollectionsJson from '@/data/collections.json';
-
-import { setProductsToDisplay } from '@/redux/features/productSlice';
+import allCollectionsJson from '@/data/categories.json';
+import { findProductPerCategory, setProductsToDisplay } from '@/redux/features/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setCategoryToDisplay, setCollectionToDisplay } from '@/redux/features/categorySlice';
 import Image from 'next/image';
+import ItemList from '@/components/ItemList';
+import { store } from '@/redux/store';
 
 export async function generateStaticParams() {
  
@@ -24,60 +19,74 @@ export async function generateStaticParams() {
   }))
 }
 
-
-const Collection = ({ params }: { params: { slug: string } }) => {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    if(params !== undefined) {    
-    
-        const collectionToDisplay = allCollectionsJson.find(collection => collection.slug === params.slug);
-        const productsToDisplay = allProductsJson.filter(product => product.collectionSlug === params.slug);
-    
-        if(collectionToDisplay) dispatch(setCollectionToDisplay(collectionToDisplay));
-        dispatch(setProductsToDisplay(productsToDisplay));
-        
-      }
+async function getCollectionProducts(slug: string) {
+  const res = await fetch('http://localhost:3000/api/products/collection', {
+    method: 'POST',
+    body: slug
+  })
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  // Recommendation: handle errors
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
   
-  }, [])
+  return res.json()
+}
 
-  const collectionToDisplay = useAppSelector(state => state.category.collectionToDisplay);
-  const productsToDisplay = useAppSelector(state => state.product.productsToDisplay);
+async function findCollections(collectionSlug: string) {
+  const collectionToDisplayJson = allCollectionsJson.find(collection => collection.slug === collectionSlug)
+  if (collectionToDisplayJson) {
+    store.dispatch(setCollectionToDisplay(collectionToDisplayJson))
+    return collectionToDisplayJson
+  }
+}
 
-  const productJsx = productsToDisplay.map((product, index) => (
-    <div key={index} className='mb-3'>
+const Collection = async ({ params }: { params: { slug: string } }) => {
+  const collectionToDisplay = await findCollections(params.slug)
+  if (collectionToDisplay !== undefined) {
+    const promiseProduct = getCollectionProducts(collectionToDisplay.slug)
+    // const productJsx = productsToDisplay.map((product, index) => (
+    //   <div key={index} className='mb-3'>
 
-      <Link href={`/catalogue/produits/${product.slug}`}>
-      
-        <div className='w-full'>
+    //     <Link href={`/catalogue/produits/${product.id}/${product.slug}`}>
+        
+    //       <div className='w-full'>
 
-          <Image src={product.images[0]} alt={`image ${product.name}`} height='0' width='0' sizes='100vw' className='w-full h-auto'/>
-        </div>
-        <h3 className='font-poppins font-medium text-lg'>{product.name}</h3>
-      </Link>
+    //         <Image src={`/images/product/${categoryToDisplay.slug}/${product.images[0]}`} alt={`image ${product.name}`} height='0' width='0' sizes='100vw' className='w-full h-auto'/>
+    //       </div>
+    //       <h3 className='font-poppins font-medium text-lg'>{product.name}</h3>
+    //     </Link>
 
-    </div>
-  ))
+    //   </div>
+    // ))
 
-  return (
-    <div className='h-100 flex flex-col min-h-full'>
+    return (
+      <div className='h-100 flex flex-col min-h-full mb-4'>
+        <Header home={false}/>
+        <Head>
+          <title>DIMEXOI : Les meubles pour votre {collectionToDisplay.name}</title>
+        </Head>
+        <main className='flex-1 p-4'>
 
-      <Header home={false}/>
+          <h1 className='text-center text-3xl font-poppins font-bold'>{collectionToDisplay.name}</h1>
+          <div className='mt-4'>
+          <Suspense fallback={<img src='/images/loading.gif' alt='loading image'/>}>
+            <ItemList
+              getData={promiseProduct}
+              categorySlug={params.slug}
+            />
+          </Suspense>
 
-      <Head>
-        <title>DIMEXOI : La collection {collectionToDisplay.name}</title>
-      </Head>
+          </div>
 
-      <main className='flex-1 p-4'>
-
-        <h1 className='text-center text-3xl font-poppins font-bold'>{collectionToDisplay.name}</h1>
-
-        <div>
-          {productJsx}
-        </div>
-      </main>
-    </div>
-  )
+        </main>
+      </div>
+    )
+  }
+  
 }
 
 export default Collection;
