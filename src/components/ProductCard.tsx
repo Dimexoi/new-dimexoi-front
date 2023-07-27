@@ -17,6 +17,7 @@ type Product = {
   categorySlug: string,
   images: string[],
   collectionSlug: string
+  collectionName: string
 }
 
 type PropsType = {
@@ -60,18 +61,18 @@ export default async function ProductCard({ getData, getCategory, getCollection}
         <div/>
         }
 
-        {product.collectionSlug !== "" ?
+        {product.collectionSlug ?
 
           <div className='mt-3 px-4'>
             <h2 className='text-lg font-bold'>Les autres meubles de la collection</h2>
             <div className='relative flex justify-center items-center overflow-hidden mb-4 rounded-lg h-32'>
 
-              <Link href={`/catalogue/collection/${collectionToDisplay.slug}`} className=''>
+              <Link href={`/catalogue/collection/${product.collectionSlug}`} className=''>
               <div className='h-full absolute top-0 left-0 right-0 bottom-0 bg-black/40 z-10'/>
                 <Image src={`/images/collection/${product.collectionSlug}.jpeg`}alt={`image collection ${product.name}`} height='0' width='0' sizes='100vw' className='h-full w-auto'/>
               </Link>
 
-              <h3 className='absolute text-white text-xl z-20'> {collectionToDisplay.name}</h3>
+              <h3 className='absolute text-white text-xl z-20'> {product.collectionName}</h3>
 
             </div>
           </div>

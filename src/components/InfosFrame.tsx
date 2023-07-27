@@ -37,7 +37,6 @@ const InfosFrame = ({texts}: CompProps) => {
         })
 
       dispatch(setInfosFrameTexts(newTexts));
-      console.log(infoFrameTexts)
     }
 
   }, [ texts])

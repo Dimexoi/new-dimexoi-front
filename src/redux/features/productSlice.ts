@@ -12,6 +12,7 @@ type Product = {
   categoryName: string,
   categorySlug: string,
   images: string[],
+  collectionName: string,
   collectionSlug: string
 }
 
@@ -135,6 +136,7 @@ const initialState: ProductState = {
     categoryName: '',
     categorySlug: '',
     images: [],
+    collectionName: '',
     collectionSlug: ''
   },
   sdbProducts: []

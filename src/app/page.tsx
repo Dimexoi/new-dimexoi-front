@@ -11,7 +11,6 @@ import worker from '../../public/images/home/icons/worker.png';
 import plan from '../../public/images/home/icons/plan.png';
 import where from '../../public/images/home/icons/where.png';
 import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
