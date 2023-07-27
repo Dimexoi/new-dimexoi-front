@@ -21,11 +21,10 @@ type Product = {
 
 type PropsType = {
   getData: Promise<Product>,
-  item: Product
   getCategory: Function
   getCollection: Function
 }
-export default async function ProductCard({ getData, item, getCategory, getCollection}: PropsType) {
+export default async function ProductCard({ getData, getCategory, getCollection}: PropsType) {
 
   const product = await getData
   store.dispatch(setDisplayedProduct(product))
@@ -45,7 +44,7 @@ export default async function ProductCard({ getData, item, getCategory, getColle
       </Head>
       <main className='flex-1 mb-4'>
 
-        <h1 className='mt-3 text-center text-3xl font-poppins font-bold'>{item.name}</h1>
+        <h1 className='mt-3 text-center text-3xl font-poppins font-bold'>{product.name}</h1>
 
         <div>
           <Carousel images={product.images} category={product.categorySlug}/>

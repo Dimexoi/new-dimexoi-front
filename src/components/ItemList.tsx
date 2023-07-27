@@ -15,24 +15,24 @@ type Product = {
 }
 
 type ApiReturn = {
-  displayedSdbProducts: Product[]
+  products: Product[]
 }
 
 type PropsType = {
   getData: Promise<ApiReturn>,
-  items: Product[]
+  categorySlug: string
 }
-export default async function ItemList({ getData, items }: PropsType) {
+export default async function ItemList({ getData, categorySlug }: PropsType) {
 
-  const {displayedSdbProducts} = await getData
+  const {products} = await getData
+  
+  store.dispatch(setProductsToDisplay(products))
 
-  store.dispatch(setProductsToDisplay(displayedSdbProducts))
-
-  const sdbJsx = displayedSdbProducts.map((product, index) => (
+  const productsJsx = products.map((product, index) => (
     <div key={product.id} className='mt-2'>
       <Link href={`/catalogue/produits/${product.id}/${product.slug}`}>
 
-        <Image src={`/images/product/salle-de-bains/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
+        <Image src={`/images/product/${categorySlug}/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
         <h3 className='font-bold'>{product.name}</h3>
 
       </Link>
@@ -43,7 +43,7 @@ export default async function ItemList({ getData, items }: PropsType) {
  
   return (
     <div>
-      {sdbJsx}
+      {productsJsx}
     </div>
   )
 }

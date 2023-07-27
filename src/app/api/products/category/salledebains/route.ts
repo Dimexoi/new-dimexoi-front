@@ -30,10 +30,10 @@ export async function POST() {
     });
 
     const {result} = data.response
-    const products = []
+    const fetchedProducts = []
 
     for (const product in result) {
-      products.push({
+      fetchedProducts.push({
         id:  result[product].id,
         name: result[product].tradename,
         category:  result[product].categoryName,
@@ -48,7 +48,7 @@ export async function POST() {
     const randomIndexes = [];
 
     while (start < 4) {
-    const random = Math.floor(Math.random() * (products.length - 0) + 0);
+    const random = Math.floor(Math.random() * (fetchedProducts.length - 0) + 0);
     if (random !== last) {
         last = random;
         randomIndexes.push(random);
@@ -56,14 +56,14 @@ export async function POST() {
     }
     }
 
-    const displayedSdbProducts = [];
+    const products = [];
 
     for (const index in randomIndexes) {
-        displayedSdbProducts.push(products[randomIndexes[index]])
+      products.push(fetchedProducts[randomIndexes[index]])
     }
     
     
-    return NextResponse.json({ displayedSdbProducts })
+    return NextResponse.json({ products })
   
   } catch (error) {
     console.log("error:", error);

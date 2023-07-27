@@ -13,11 +13,12 @@ export async function POST(req) {
       },
       endPoint: 'https://apifeed.sellsy.com/0/'
     })
+    
     const params = {
       type: "item",
       search: {
         tags: "website",
-        categoryid: req.body? body.categoryId : ''
+        categoryid: req.body? body : ''
       },
       pagination: {
         nbperpage: "20"
@@ -37,7 +38,7 @@ export async function POST(req) {
         id:  result[product].id,
         name: result[product].tradename,
         category:  result[product].categoryName,
-        categorySlug: 'test',
+        categorySlug: '',
         slug:  result[product].slug,
         images: result[product].customfields[2].textval.split(',')
       })

@@ -62,7 +62,6 @@ const Product = async ({ params }: { params: { id: string, slug: string } }) => 
       <Suspense fallback={<img src='/images/loading.gif' alt='loading image'/>}>
         <ProductCard
           getData={promiseProduct}
-          item={displayedProduct}
           getCategory={findCategories}
           getCollection={findCollections}
         />

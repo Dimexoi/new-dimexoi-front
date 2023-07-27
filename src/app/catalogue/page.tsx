@@ -130,7 +130,7 @@ export default async function Catalogue() {
             <Suspense fallback={<img src='/images/loading.gif' alt='loading image'/>}>
               <ItemList
                 getData={promise}
-                items={sdbProducts}
+                categorySlug='salle-de-bains'
               />
             </Suspense>
 
