@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server'
 const Sellsy = require("node-sellsy").default
  
-export async function POST(req) {
+export async function POST(request: Request) {
   try {
-    const body = await req.json() // res now contains body
+    const res = await request.json()
       const sellsy = new Sellsy({
         creds: {
         consumerKey: process.env.NEXT_PUBLIC_CONSUMER_KEY,
@@ -13,18 +13,11 @@ export async function POST(req) {
       },
       endPoint: 'https://apifeed.sellsy.com/0/'
     })
-    console.log("===========================");
-    console.log("===========================");
-    console.log("===========================");
-    console.log('ON EST LA');
-    console.log("===========================");
-    console.log("===========================");
-    console.log("===========================");
 
     const params = {
       type: "item",
       search: {
-        tags: `collection:${body}`,
+        tags: `collection:${res.collectionSlug}`
       },
       pagination: {
         nbperpage: "20"
@@ -111,14 +104,13 @@ export async function POST(req) {
         id:  result[product].id,
         name: result[product].tradename,
         category:  result[product].categoryName,
-        categorySlug: '',
         slug:  result[product].slug,
         collectionName,
         collectionSlug,
         images: result[product].customfields[2].textval.split(',')
       })
     }
-   
+    
     return NextResponse.json({ products })
   
   } catch (error) {

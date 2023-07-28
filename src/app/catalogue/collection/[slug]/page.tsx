@@ -4,7 +4,7 @@ import Header from '@/components/Header';
 import Head from 'next/head';
 
 import allCategoriesJson from '@/data/categories.json';
-import allCollectionsJson from '@/data/categories.json';
+import allCollectionsJson from '@/data/collections.json';
 import { findProductPerCategory, setProductsToDisplay } from '@/redux/features/productSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setCategoryToDisplay, setCollectionToDisplay } from '@/redux/features/categorySlice';
@@ -22,7 +22,7 @@ export async function generateStaticParams() {
 async function getCollectionProducts(slug: string) {
   const res = await fetch('http://localhost:3000/api/products/collection', {
     method: 'POST',
-    body: slug
+    body: JSON.stringify({ collectionSlug: slug }),
   })
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
@@ -37,7 +37,7 @@ async function getCollectionProducts(slug: string) {
 }
 
 async function findCollections(collectionSlug: string) {
-  const collectionToDisplayJson = allCollectionsJson.find(collection => collection.slug === collectionSlug)
+  const collectionToDisplayJson = allCollectionsJson.find(category => category.slug === collectionSlug)
   if (collectionToDisplayJson) {
     store.dispatch(setCollectionToDisplay(collectionToDisplayJson))
     return collectionToDisplayJson
@@ -45,9 +45,9 @@ async function findCollections(collectionSlug: string) {
 }
 
 const Collection = async ({ params }: { params: { slug: string } }) => {
-  const collectionToDisplay = await findCollections(params.slug)
-  if (collectionToDisplay !== undefined) {
-    const promiseProduct = getCollectionProducts(collectionToDisplay.slug)
+  const categoryToDisplay = await findCollections(params.slug)
+  if (categoryToDisplay !== undefined) {
+    const promiseProduct = getCollectionProducts(categoryToDisplay.slug)
     // const productJsx = productsToDisplay.map((product, index) => (
     //   <div key={index} className='mb-3'>
 
@@ -67,11 +67,11 @@ const Collection = async ({ params }: { params: { slug: string } }) => {
       <div className='h-100 flex flex-col min-h-full mb-4'>
         <Header home={false}/>
         <Head>
-          <title>DIMEXOI : Les meubles pour votre {collectionToDisplay.name}</title>
+          <title>DIMEXOI : Les meubles pour votre {categoryToDisplay.name}</title>
         </Head>
         <main className='flex-1 p-4'>
 
-          <h1 className='text-center text-3xl font-poppins font-bold'>{collectionToDisplay.name}</h1>
+          <h1 className='text-center text-3xl font-poppins font-bold'>{categoryToDisplay.name}</h1>
           <div className='mt-4'>
           <Suspense fallback={<img src='/images/loading.gif' alt='loading image'/>}>
             <ItemList

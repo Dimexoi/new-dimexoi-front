@@ -33,7 +33,7 @@ export default async function ItemList({ getData, categorySlug }: PropsType) {
     <div key={product.id} className='mt-2'>
       <Link href={`/catalogue/produits/${product.id}/${product.slug}`}>
 
-        <Image src={`/images/product/${categorySlug}/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
+        <Image src={`/images/product/${product.images[0]}`} alt={`image ${product.name}`} width='0' height='0' sizes='100vw' className='w-auto'/>
         <h3 className='font-bold'>{product.name}</h3>
 
       </Link>
