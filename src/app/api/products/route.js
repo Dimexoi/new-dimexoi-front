@@ -101,18 +101,28 @@ export async function POST(req) {
           }
         }
       }
+      let imagesString = ''
+      let websiteName = ''
+      for (const field in result[product].customfields) {
+        if (result[product].customfields[field].code === 'websitepic') {
+          imagesString = result[product].customfields[field].textval
+        }
+        if (result[product].customfields[field].code === 'websitename') {
+          websiteName = result[product].customfields[field].textval
+        }
+      }
       products.push({
         id:  result[product].id,
-        name: result[product].tradename,
+        name: websiteName,
         category:  result[product].categoryName,
         categorySlug: '',
         slug:  result[product].slug,
         collectionName,
         collectionSlug,
-        images: result[product].customfields[2].textval.split(',')
+        images: imagesString.split(',')
       })
     }
-   
+    
     return NextResponse.json({ products })
   
   } catch (error) {

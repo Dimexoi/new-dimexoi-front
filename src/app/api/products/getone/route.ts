@@ -106,15 +106,25 @@ export async function POST(req: Request) {
         }
       }
     }
-
+    let imagesString = ''
+    let websiteName = ''
+    for (const field of result.customfields) {
+      if (field.code === 'websitepic') {
+        imagesString = field.formatted_value
+      }
+      if (field.code === 'websitename') {
+        websiteName = field.formatted_value
+      }
+    }
+    console.log(result.customfields);
     const product = {
       id:  result.id,
-      name: result.tradename,
+      name: websiteName,
       categorySlug:  slug,
       slug:  result.slug,
       collectionName,
       collectionSlug,
-      images: result.customfields[2].formatted_value.split(',')
+      images: imagesString.split(',')
     } 
     
     return NextResponse.json(product)

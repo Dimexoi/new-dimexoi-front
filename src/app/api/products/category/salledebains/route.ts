@@ -100,14 +100,24 @@ export async function POST() {
           }
         }
       }
+      let imagesString = ''
+      let websiteName = ''
+      for (const field in result[product].customfields) {
+        if (result[product].customfields[field].code === 'websitepic') {
+          imagesString = result[product].customfields[field].textval
+        }
+        if (result[product].customfields[field].code === 'websitename') {
+          websiteName = result[product].customfields[field].textval
+        }
+      }
       fetchedProducts.push({
         id:  result[product].id,
-        name: result[product].tradename,
+        name: websiteName,
         category:  result[product].categoryName,
         slug:  result[product].slug,
         collectionName,
         collectionSlug,
-        images: result[product].customfields[2].textval.split(',')
+        images: imagesString.split(',')
       })
     }
 
